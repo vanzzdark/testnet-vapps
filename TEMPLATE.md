@@ -1,67 +1,55 @@
-# vApp Submission: [Your Project Name]
 
-## Verification
-```yaml
-github_username: "your-username"
-discord_id: "123456789012345678"
-timestamp: "2025-01-15"
-```
+# Crypto Fortune Cookie (Random-Only)
 
-## Developer
-- **Name**: Your Name
-- **GitHub**: @your-username
-- **Discord**: username#1234
-- **Experience**: Brief background
+**Category:** gaming  
+**Author:** @vanzzdark 
+**Discord:** superma
 
-## Project
+## 1) Summary
+A simple vApp: user connect wallet → click “Open Fortune Cookie” → contract returns a random crypto-themed fortune. Fun, viral, and perfect as testnet demo.
 
-### Name & Category
-- **Project**: Your vApp Name
-- **Category**: identity/defi/social/gaming/infrastructure/other
+## 2) Problem & Motivation
+Communities need tiny, delightful on-chain experiences to onboard users. This vApp provides instant gratification (one-click) and easy for community
 
-### Description
-What problem does your vApp solve? What does it do?
+## 3) User Stories
+- As a user, I connect wallet and click a button to receive a fortune.
+- I can see my last fortune anytime.
+- (Optional next) I can share a permalink to my last fortune.
 
-### SL Integration  
-How will you use Soundness Layer? What specific SL features?
+## 4) Core Flow
+1. Connect wallet
+2. Call `openCookie()` → contract picks an index secara pseudo-random
+3. Store & return the message; UI shows the fortune
+4. `getLastFortune(address)` for fetching
 
-## Technical
+## 5) Architecture
+- **Smart Contract (Solidity):** stores predefined fortunes; generates pseudo-random index (time + sender + prevrandao).
+- **Frontend:** minimal React (wagmi/ethers) or plain ethers.js; single button “Open Fortune”.
+- **Storage:** on-chain array for messages (short strings).
+- **No NFTs, no images** (MVP light and fast).
 
-### Architecture
-High-level system design and approach
+## 6) Soundness Layer Integration Plan
+- **MVP (this submission):** pure vApp on-chain demo to qualify; no ZK proof.
+- **Phase-2 (upgrade):** replace pseudorandomness with a verifiable draw:
+  - generate randomness off-chain → produce ZK proof (e.g., Ligetron/SP1),
+  - store proof as Walrus blob,
+  - verify on Soundness Layer and publish verified result back to vApp.
+This keeps MVP simple today while aligning with Soundness Layer’s verification path.
 
-### Stack
-- **Frontend**: React/Vue/etc
-- **Backend**: Rust/Node.js/Python/etc  
-- **Blockchain**: SL + others
-- **Storage**: Database/WALRUS/IPFS/etc
+## 7) Tech Stack
+- Solidity ^0.8.20
+- Frontend: React + ethers (or wagmi)
+- Tooling: Hardhat/Foundry (any)
+- Network: Soundness testnet (per team guidance)
 
-### Features
-1. Core feature 1
-2. Core feature 2  
-3. Core feature 3
+## 8) Milestones
+- **Day 1–2:** Contract + minimal UI, deploy to testnet
+- **Day 3:** Polish copy + share demo
+- **Phase-2:** ZK randomness integration via Soundness Layer
 
-## Timeline
+## 9) Risks & Mitigations
+- Pseudorandomness not truly fair → addressed in Phase-2 ZK plan
+- Spam clicks → simple cool-down per address (optional)
 
-### PoC (2-4 weeks)
-- [ ] Basic functionality
-- [ ] SL integration
-- [ ] Simple UI
-
-### MVP (4-8 weeks)  
-- [ ] Full features
-- [ ] Production ready
-- [ ] User testing
-
-## Innovation
-What makes this unique? Why will people use it?
-
-## Contact
-Preferred contact method and where you'll share updates.
-
-
-**Checklist before submitting:**
-- [ ] All fields completed
-- [ ] GitHub username matches PR author  
-- [ ] SL integration explained
-- [ ] Timeline is realistic
+## 10) Team
+Solo builder (@vanzzdark). Background: web3 tinkerer, quick prototyper.
