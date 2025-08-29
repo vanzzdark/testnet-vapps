@@ -19,13 +19,13 @@ Communities need tiny, delightful on-chain experiences to onboard users. This vA
 1. Connect wallet
 2. Call `openCookie()` → contract picks an index secara pseudo-random
 3. Store & return the message; UI shows the fortune
-4. `getLastFortune(address)` untuk fetch ulang
+4. `getLastFortune(address)` for fetching
 
 ## 5) Architecture
 - **Smart Contract (Solidity):** stores predefined fortunes; generates pseudo-random index (time + sender + prevrandao).
 - **Frontend:** minimal React (wagmi/ethers) or plain ethers.js; single button “Open Fortune”.
 - **Storage:** on-chain array for messages (short strings).
-- **No NFTs, no images** (MVP ringan, cepat).
+- **No NFTs, no images** (MVP light and fasr).
 
 ## 6) Soundness Layer Integration Plan
 - **MVP (this submission):** pure vApp on-chain demo to qualify; no ZK proof.
